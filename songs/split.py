@@ -1,5 +1,6 @@
 import soundfile as sf 
 import sys
+import os
 filename=sys.argv[1]
 soxfile=open("split.sh",'w')
 f=sf.SoundFile(filename+".wav")
@@ -10,4 +11,5 @@ x=int(time//10)
 soxfile.write("mkdir "+filename+"\n")
 for i in range(x):
     soxfile.write("sox "+filename+".wav "+filename+"/"+filename+"split_"+str(i)+".wav trim "+str(10*i)+" 10\n")
-
+soxfile.close()
+os.system("./split.sh")
